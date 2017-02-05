@@ -48,7 +48,6 @@ Etant donné que sur l'API des produit il n'y as aucune facon de retrouver l'ID 
 
 ##Passer une commande: (TODO)
 Le serveur back doit :
- - appeler la méthode createBill() du provider pour enregistrer la facture
  - appeler la méthode addTransac() ()et peut être même validTransac) du payment pour enregistrer le payment.
  - appeler la méthode je sais pas quoi du service de livraison.
 

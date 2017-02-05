@@ -33,6 +33,4 @@ public class ClientResource {
         return clientService.registerClient(client);
     }
 
-
-
 }

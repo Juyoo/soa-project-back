@@ -37,7 +37,7 @@ public class ClientResourceTest {
 
     @Test
     public void should() throws Exception {
-        final Client client = new Client("jack", "daniel", "jack", "daniel", null, null);
+        final Client client = new Client("jack", "daniel", "jack", "daniel", null, null, null);
         given(this.clientService.registerClient(any()))
                 .willReturn(client);
 

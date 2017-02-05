@@ -12,6 +12,7 @@ public class Client {
     private String password;
     private String firstName;
     private String lastName;
+    private Long paymentServiceId;
     private String paymentServiceToken;
     private String providerServiceId;
 
@@ -23,15 +24,17 @@ public class Client {
         this.password = paymentClient.getPwd();
         this.firstName = paymentClient.getFname();
         this.lastName = paymentClient.getName();
+        this.paymentServiceId = paymentClient.getId();
         this.paymentServiceToken = paymentClient.getToken();
         this.providerServiceId = providerClient.getId();
     }
 
-    public Client(final String login, final String password, final String firstName, final String lastName, final String paymentServiceToken, final String providerServiceId) {
+    public Client(final String login, final String password, final String firstName, final String lastName, final Long paymentServiceId, final String paymentServiceToken, final String providerServiceId) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.paymentServiceId = paymentServiceId;
         this.paymentServiceToken = paymentServiceToken;
         this.providerServiceId = providerServiceId;
     }
@@ -50,6 +53,10 @@ public class Client {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public Long getPaymentServiceId() {
+        return paymentServiceId;
     }
 
     public String getPaymentServiceToken() {
