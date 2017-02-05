@@ -53,4 +53,9 @@ public class PaymentClient {
     public Float getSolde() {
         return solde;
     }
+
+
+    public void setPwd(final String pwd) {
+        this.pwd = pwd;
+    }
 }

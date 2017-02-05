@@ -1,20 +1,13 @@
 package org.semi.croustillants.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.semi.croustillants.model.Client;
 import org.semi.croustillants.model.payment.PaymentClient;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.semi.croustillants.model.provider.ProviderClient;
+import org.semi.croustillants.services.delegator.payment.PaymentClientService;
+import org.semi.croustillants.services.delegator.provider.ProviderClientService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
-
-import java.util.List;
-
-import static org.semi.croustillants.IntegrationApplication.PAYMENT_BASE_URL;
 
 /**
  * Created by raymo on 04/02/2017.
@@ -22,39 +15,25 @@ import static org.semi.croustillants.IntegrationApplication.PAYMENT_BASE_URL;
 @Service
 public class ClientService {
 
-    private final ObjectMapper mapper;
+    private final PaymentClientService paymentClientService;
+    private final ProviderClientService providerClientService;
 
     @Inject
-    public ClientService(final ObjectMapper mapper) {
-        this.mapper = mapper;
+    public ClientService(final PaymentClientService paymentClientService, final ProviderClientService providerClientService) {
+        this.paymentClientService = paymentClientService;
+        this.providerClientService = providerClientService;
     }
 
-    public PaymentClient registerClient(final PaymentClient client) throws JsonProcessingException {
-        final RestTemplate restTemplate = new RestTemplate();
-        final ResponseEntity<String> registerResponse = restTemplate.postForEntity(PAYMENT_BASE_URL + "/client/add", prepareEntity(client), String.class);
+    public Client registerClient(final Client client) {
+        final PaymentClient paymentClient = paymentClientService.registerClient(
+                new PaymentClient(null, client.getFirstName(), client.getLastName(), client.getLogin(), client.getPassword(), null, null)
+        );
 
-        final String token = restTemplate.getForObject(PAYMENT_BASE_URL + "/login=" + client.getLogin() + "-password=" + client.getPwd(), TokenHolder[].class)[0].getToken();
+        final ProviderClient providerClient = providerClientService.registerClient(
+                new ProviderClient(null, client.getFirstName(), client.getLastName())
+        );
 
-        return restTemplate.getForObject(PAYMENT_BASE_URL + "/client/token=" + token, PaymentClient[].class)[0];
-    }
-
-    private HttpEntity<String> prepareEntity(final PaymentClient object) throws JsonProcessingException {
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        final String json = mapper.writeValueAsString(object);
-        return new HttpEntity<>(json, headers);
-    }
-
-    static class TokenHolder {
-        private String token;
-
-        public TokenHolder() {
-        }
-
-        public String getToken() {
-            return token;
-        }
+        return new Client(paymentClient, providerClient);
     }
 
 }

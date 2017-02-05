@@ -1,7 +1,6 @@
 package org.semi.croustillants.resources;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.semi.croustillants.model.payment.PaymentClient;
+import org.semi.croustillants.model.Client;
 import org.semi.croustillants.services.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
-import static javax.ws.rs.core.MediaType.*;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by raymo on 04/02/2017.
@@ -30,8 +29,10 @@ public class ClientResource {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = POST, produces = APPLICATION_JSON, consumes = APPLICATION_JSON)
-    public PaymentClient register(@RequestBody final PaymentClient client) throws JsonProcessingException {
+    public Client register(@RequestBody final Client client) {
         return clientService.registerClient(client);
     }
+
+
 
 }
