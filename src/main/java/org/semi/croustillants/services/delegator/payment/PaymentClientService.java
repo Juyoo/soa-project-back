@@ -38,7 +38,7 @@ public class PaymentClientService {
             final PaymentClient registeredClient = restTemplate.getForObject(PAYMENT_BASE_URL + "/client/token=" + token, PaymentClient[].class)[0];
             registeredClient.setPwd(client.getPwd());
             return registeredClient;
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             throw new RestPaymentServiceException("Error occured on payment service job when creating client: " + t.getMessage(), t);
         }
     }

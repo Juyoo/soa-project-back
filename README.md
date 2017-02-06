@@ -1,6 +1,9 @@
 # Doc pour le front:
 
 ### Créer un client:
+
+Le nom des clients est limité 6 caratères !!!!!
+
 **Requête**
 
     POST http://localhost:8080/client/register
@@ -46,40 +49,55 @@ Etant donné que sur l'API des produit il n'y as aucune facon de retrouver l'ID 
     ]
 
 
-##Passer une commande: (TODO)
-Le serveur back doit :
- - appeler la méthode addTransac() ()et peut être même validTransac) du payment pour enregistrer le payment.
- - appeler la méthode je sais pas quoi du service de livraison.
+##Passer une commande:
 
 **Requête**
 
     POST http://localhost:8080/order
-    {
+      {
         "client": {
-            "login": "mister",
-            "password": "sandman",
-            "firstName": "mister",
-            "lastName": "sandman",
-            "paymentServiceToken": "kmo8i2vk1fs1jca",
-            "providerServiceId": "5897567146e0fb0005f358f0"
+          "login": "johnny",
+          "password": "begood",
+          "firstName": "begood",
+          "lastName": "johnny",
+          "paymentServiceId": 84,
+          "paymentServiceToken": "ehb9tb69j05jssl",
+          "providerServiceId": "5897a63046e0fb0005f35903"
+        },
+        "recipientAddress": {
+          "streetNumber": "9",
+          "street": "rue philippe marcombe",
+          "zip": "63000",
+          "city": "Clermont-Ferrand"
         },
         "cart": {
-            "productWithQties": [
-                {
-                    "product": {
-                        "id": "5839c02aa5ff1f00040367c5",
-                        "name": "Lumia 950",
-                        "description": "Smartphone Windows",
-                        "price": 299.99,
-                        "quantity": 21,
-                        "image": "http://mynokiablog.com/wp-content/uploads/2013/07/phab--600x337.jpg",
-                        "available": true
-                    },
-                    "quantity": 1
-                }
-            ]
-        },
-    }
+          "productWithQties": [
+            {
+              "product": {
+                "id": "5839bd82a5ff1f00040367c4",
+                "name": "Nexus 6P",
+                "description": "Smartphone Android, 32G (Aluminium)",
+                "price": 350,
+                "quantity": 52,
+                "image": "http://www.android.gs/wp-content/uploads/2015/12/Nexus-5X-600x337.jpg",
+                "available": true
+              },
+              "quantity": 2
+            }
+          ]
+        }
+      }
+
+**Réponse**
+
+    ???
+    
+    
+##Suivre un colis
+
+**Requête**
+
+    GET http://localhost:8080/tracking/{shippingId}
 
 **Réponse**
 
