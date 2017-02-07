@@ -1,7 +1,5 @@
-package org.semi.croustillants;
+package org.semi.croustillants.model;
 
-import org.semi.croustillants.model.Cart;
-import org.semi.croustillants.model.Client;
 import org.semi.croustillants.model.isheep.Shipping;
 
 /**

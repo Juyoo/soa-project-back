@@ -1,14 +1,12 @@
 package org.semi.croustillants.resources;
 
-import org.semi.croustillants.TransactionRequest;
+import org.semi.croustillants.model.TransactionRequest;
 import org.semi.croustillants.model.Transaction;
 import org.semi.croustillants.services.TransactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-
-import java.util.Date;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 

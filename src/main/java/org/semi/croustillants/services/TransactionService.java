@@ -1,6 +1,6 @@
 package org.semi.croustillants.services;
 
-import org.semi.croustillants.TransactionRequest;
+import org.semi.croustillants.model.TransactionRequest;
 import org.semi.croustillants.model.Transaction;
 import org.semi.croustillants.model.isheep.Shipping;
 import org.semi.croustillants.model.provider.BillForm;
