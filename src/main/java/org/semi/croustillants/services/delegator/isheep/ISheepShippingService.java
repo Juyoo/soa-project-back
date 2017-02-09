@@ -39,6 +39,15 @@ public class ISheepShippingService {
         }
     }
 
+    public Float estimate(final Shipping shipping) {
+        try {
+            final RestOperations restTemplate = new RestTemplate();
+            return restTemplate.postForObject(SHIPPING_BASE_URL + "/shipping/estimate", prepareEntity(shipping), Float.class);
+        } catch (final Throwable t) {
+            throw new RestISheepServiceException("Error occured on isheep service job when creating shipping: " + t.getMessage(), t);
+        }
+    }
+
     private HttpEntity<String> prepareEntity(final Shipping object) throws JsonProcessingException {
         final HttpHeaders headers = new HttpHeaders();
         headers.set("X-Authorization", I_SHEEP_TOKEN);

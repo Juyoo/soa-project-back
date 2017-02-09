@@ -49,6 +49,11 @@ public class TransactionService {
         return transaction;
     }
 
+
+    public Price estimateShipping(final TransactionRequest transactionRequest) {
+        return new Price(iSheepShippingService.estimate(createShippingFromRequest(transactionRequest)));
+    }
+
     private Shipping createShippingFromRequest(final TransactionRequest transactionRequest) {
         final Shipping.Parcel parcel = new Shipping.Parcel(32f, 32f, 32f, 60f);
 
@@ -60,6 +65,18 @@ public class TransactionService {
                 transactionRequest.getRecipientAddress(),
                 parcel
         );
+    }
+
+    public static class Price {
+        private final Float price;
+
+        public Price(final Float price) {
+            this.price = price;
+        }
+
+        public Float getPrice() {
+            return price;
+        }
     }
 
 }

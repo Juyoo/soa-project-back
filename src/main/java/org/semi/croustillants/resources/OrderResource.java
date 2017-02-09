@@ -32,5 +32,10 @@ public class OrderResource {
         return transaction;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "estimate", method = RequestMethod.POST, produces = APPLICATION_JSON, consumes = APPLICATION_JSON)
+    public TransactionService.Price estimateShipping(@RequestBody final TransactionRequest transactionRequest) {
+        return transactionService.estimateShipping(transactionRequest);
+    }
 
 }
